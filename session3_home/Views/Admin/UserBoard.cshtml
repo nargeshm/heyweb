@@ -1,0 +1,137 @@
+﻿@model List<Dal.User>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>StudentBoard</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="~/Home/index">My University </a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="~/Home/index">Home</a></li>
+                <li><a href="#">Academy Management</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Account/signUp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="~/Account/logIn"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+         
+        </div>
+    </nav>
+    <div class="container">
+        <h2>User board info</h2>
+        <p>Hey Dear </p>
+        <p>for create a new User click here: </p>
+        <a href="~/Admin/Create" class="btn btn-warning">Create user</a>
+        <br>
+        <br>
+        <table class="table table-striped">
+            <thead style="background-color:darksalmon">
+                <tr>
+                    <th>name</th>
+                    <th>userName</th>
+                    <th>passWord</th>
+                    <th>email</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td>@item.name</td>
+                        <td>@item.Username</td>
+                        <td>@item.Password</td>
+                        <td>@item.Email</td>
+                        <td><a href="~/Admin/Edit/@item.UserId" class="btn btn-outline-primary"> Edit </a>   <a href="~/Admin/Delete/@item.UserId" class="btn btn-outline-warning"> Delete</a>  </td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+        <h2>Question board info</h2>
+        <p>for create a new Question click here: </p>
+        <a href="~/Admin/CreateQuestion" class="btn btn-warning">Create Question</a>
+        <br>
+        <br>
+        <table class="table table-striped">
+            <thead style="background-color:orange">
+                <tr>
+                    <th>Number</th>
+                    <th>Descrioption</th>
+                    @*add new title for question table to show answers and userlist*@
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.Data as List<Dal.Question>)
+                {
+
+                    <tr>
+                        <td>@item.QuestionId</td>
+                        <td>@item.Description</td>
+
+                        <td><a href="~/Admin/EditQuestion/@item.QuestionId" class="btn btn-outline-primary"> Edit </a>   <a href="~/Admin/DeleteQuestion/@item.QuestionId" class="btn btn-outline-warning"> Delete</a>  </td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+    @*choice table*@
+    <div class="container">
+        <h2>Choice board info</h2>
+        <p>for create a new Choice click here: </p>
+        <a href="~/Admin/CreateChoice" class="btn btn-info">Create your Choice</a>
+        <br>
+        <br>
+        <table class="table table-striped">
+            <thead style="background-color:plum">
+                <tr>
+                    <th>Number</th>
+                    <th>Text</th>
+                    <th>question number</th>
+                    @*add new title for question table to show answers and userlist*@
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.choice as List<Dal.Choice>)
+                {
+
+                    <tr>
+                        <td>@item.ChoiceId</td>
+                        <td>@item.ChoiceText</td>
+                        <td>@item.QuestionId</td>
+                        <td><a href="~/Admin/EditChoice/@item.ChoiceId" class="btn btn-outline-primary"> Edit </a>   <a href="~/Admin/DeleteChoice/@item.ChoiceId" class="btn btn-outline-warning"> Delete</a>  </td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
